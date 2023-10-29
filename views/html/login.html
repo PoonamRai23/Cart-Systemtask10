@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+    <title>log-in</title>
+    <style>
+        .main-row{
+            
+            height:619px;
+            /* background-color: rgb(90, 90, 88); */
+            border: 2px solid black;
+            /* background-color: #d8f5ef; */
+            /* background-color:#d6b4fc; */
+            background-color: rgb(141, 133, 133);
+        }
+        .main{
+             width: 70%; 
+            height: 68%;
+            /* background-color: rgb(255, 255, 241); */
+            /* background-color: #EDCBD2; */
+            /* background-color: #91B187; */
+            background-color:#82c7b2;
+            
+        }
+        .box{
+            width: 50%; 
+            height: 417px;
+            /* background-color: #b1b1a9; */
+            /* background-color:#955da1 */
+            /* background-color:#3a9278; */
+            background-color:#82c7b2;
+        }
+        .box2{
+            width: 72%; 
+            height: 300px;
+            /* background-color: #dbd0d9ea; */
+            /* background-color:#CF9FFF; */
+            background-color:#31836a;
+               
+        }
+        .btn2{
+             background-color: rgb(185, 194, 194);
+            border-radius: 5px;
+        }
+        .column2{
+            width: 50%; 
+            height: 417px;
+        }
+        
+        </style>
+        </head>
+        <body>
+            <div class="container-fluid main-row d-flex align-items-center ">
+                <div class="container main border border-1 border-dark">
+                    <div class="row">
+                        <div class="col-6  box d-flex align-items-center justify-content-center">
+                            <div class="row   box2 ">
+                                <div class="col-12  d-flex align-items-center justify-content-center">
+                                    <div>
+                                        <form onsubmit="On(event)">
+                                    
+                                        <label for="email">Enter your email</label>
+                                        <input type="email" name="email" id="email" placeholder="Enter email" class="form-control"><br>
+            
+                                        <label for="password">Enter your password</label>
+                                        <input type="password" name="password" id="password" placeholder="password" class="form-control" ><br>
+                                        <button class="btn2 btn-light">Log-In</button><br>
+                                        <!-- <button class="btn3">sign-up</button> -->
+                                        <a href="resetpassword.html">ForgotPassword</a>
+                                        </form></div>
+                                    
+                                </div> 
+                            </div>
+                        </div>
+                        <div class="col-6 column2 m-0 p-0">
+                            <img src="/images/login11.jpg" width="100%" height="417px"> 
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+            <script>
+              async  function On(event){
+                    event.preventDefault()
+                    
+                    const email=document.getElementById('email').value
+                    const password=document.getElementById('password').value
+
+                    const obj={
+                        email,password
+                    }
+                    console.log(obj)
+                    try{
+                        const res=await axios.post('http://localhost:3000/login',obj)
+                        localStorage.setItem('token',res.data.token)
+                    //console.log("get data successfully",res.data) 
+
+                    if(res.status===200){
+                    window.location.href='/html/expense.html'
+
+                }
+                else{
+                    console.log('getting error')
+                }
+                
+                    }
+                  catch(error){
+                    console.log("getting error",error) 
+                  }
+
+                    // localStorage.setItem(obj.email,JSON.stringify(obj))
+                }
+            </script>
+            </body>
+
+</html>
