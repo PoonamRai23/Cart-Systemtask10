@@ -34,44 +34,44 @@ router.delete(
 //   }
 // );
 
-router.get(
-  "/expense/pagination",
-  userAuthentication.authenticate,
-  async (req, res) => {
-    try {
-      const page = parseInt(req.query.page) || 1;
-      const limit = parseInt(req.query.limit) || 10;
+// router.get(
+//   "/expense/pagination",
+//   userAuthentication.authenticate,
+//   async (req, res) => {
+//     try {
+//       const page = parseInt(req.query.page) || 1;
+//       const limit = parseInt(req.query.limit) || 10;
 
-      const offset = (page - 1) * limit;
+//       const offset = (page - 1) * limit;
 
-      // Fetch data from the database using Mongoose
-      const totalItems = await Expense.countDocuments(); // Get the total number of items
+//       // Fetch data from the database using Mongoose
+//       const totalItems = await Expense.countDocuments(); // Get the total number of items
 
-      // Query the data and apply pagination
-      const data = await Expense.find().skip(offset).limit(limit);
+//       // Query the data and apply pagination
+//       const data = await Expense.find().skip(offset).limit(limit);
 
-      // Calculate the total number of pages based on the total items and limit
-      const totalPages = Math.ceil(totalItems / limit);
+//       // Calculate the total number of pages based on the total items and limit
+//       const totalPages = Math.ceil(totalItems / limit);
 
-      res.status(200).json({
-        success: true,
-        data: data,
-        totalPages: totalPages,
-      });
-    } catch (error) {
-      console.error(error);
-      res.status(500).json({
-        success: false,
-        error: "An error occurred while fetching data.",
-      });
-    }
-  }
-);
+//       res.status(200).json({
+//         success: true,
+//         data: data,
+//         totalPages: totalPages,
+//       });
+//     } catch (error) {
+//       console.error(error);
+//       res.status(500).json({
+//         success: false,
+//         error: "An error occurred while fetching data.",
+//       });
+//     }
+//   }
+// );
 
-router.get(
-  "/download",
-  userAuthentication.authenticate,
-  exController.deleteExpense
-);
+// router.get(
+//   "/download",
+//   userAuthentication.authenticate,
+//   exController.deleteExpense
+// );
 
 module.exports = router;
